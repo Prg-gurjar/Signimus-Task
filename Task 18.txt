@@ -1,0 +1,149 @@
+ Task 18:
+
+Singleton Logger
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Logger {
+    private static Logger instance;
+    private static final Object lock = new Object();
+
+    private Logger() {}
+
+    public static Logger getInstance() {
+        synchronized (lock) {
+            if (instance == null) {
+                instance = new Logger();
+            }
+            return instance;
+        }
+    }
+
+    public void log(String message) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String timestamp = LocalDateTime.now().format(formatter);
+        System.out.println(timestamp + " - " + message);
+    }
+
+    public static void main(String[] args) {
+        Logger logger = Logger.getInstance();
+        logger.log("This is a log message.");
+    }
+}
+
+
+Singleton DatabaseConnection
+
+public class DatabaseConnection {
+    private static DatabaseConnection instance;
+    private static final Object lock = new Object();
+    private boolean isConnected = false;
+
+    private DatabaseConnection() {}
+
+    public static DatabaseConnection getInstance() {
+        synchronized (lock) {
+            if (instance == null) {
+                instance = new DatabaseConnection();
+            }
+            return instance;
+        }
+    }
+
+    public void connect() {
+        if (!isConnected) {
+            System.out.println("Connecting to the database...");
+            isConnected = true;
+        } else {
+            System.out.println("Already connected to the database.");
+        }
+    }
+
+    public void disconnect() {
+        if (isConnected) {
+            System.out.println("Disconnecting from the database...");
+            isConnected = false;
+        } else {
+            System.out.println("Not connected to the database.");
+        }
+    }
+
+    public static void main(String[] args) {
+        DatabaseConnection dbConnection = DatabaseConnection.getInstance();
+        dbConnection.connect();
+        dbConnection.disconnect();
+    }
+}
+
+
+Enum UserRole
+
+public enum UserRole {
+    ADMIN("Full access"),
+    USER("Limited access"),
+    GUEST("Read-only access");
+
+    private final String accessLevel;
+
+    UserRole(String accessLevel) {
+        this.accessLevel = accessLevel;
+    }
+
+    public String getAccessLevel() {
+        return accessLevel;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Admin access level: " + UserRole.ADMIN.getAccessLevel());
+        System.out.println("User access level: " + UserRole.USER.getAccessLevel());
+        System.out.println("Guest access level: " + UserRole.GUEST.getAccessLevel());
+    }
+}
+
+
+Enum Day
+
+public enum Day {
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY,
+    SUNDAY;
+
+    public boolean isWeekday() {
+        return this != SATURDAY && this != SUNDAY;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Is Monday a weekday? " + Day.MONDAY.isWeekday());
+        System.out.println("Is Saturday a weekday? " + Day.SATURDAY.isWeekday());
+    }
+}
+
+
+Enum StatusCode
+
+public enum StatusCode {
+    SUCCESS("Operation successful"),
+    ERROR("Operation failed"),
+    PENDING("Operation pending");
+
+    private final String message;
+
+    StatusCode(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Success message: " + StatusCode.SUCCESS.getMessage());
+        System.out.println("Error message: " + StatusCode.ERROR.getMessage());
+        System.out.println("Pending message: " + StatusCode.PENDING.getMessage());
+    }
+}

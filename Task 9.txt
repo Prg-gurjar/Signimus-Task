@@ -1,0 +1,63 @@
+ Task 9:
+
+String Reversal
+
+public class StringReversal {
+    public static void main(String[] args) {
+        String input = "Hello World!";
+        System.out.println("Original String: " + input);
+        System.out.println("Reversed String: " + reverseString(input));
+    }
+
+    public static String reverseString(String input) {
+        StringBuilder reversed = new StringBuilder();
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed.append(input.charAt(i));
+        }
+        return reversed.toString();
+    }
+}
+
+
+Palindrome Check
+
+public class PalindromeCheck {
+    public static void main(String[] args) {
+        String input = "madam";
+        System.out.println("Is '" + input + "' a palindrome? " + isPalindrome(input));
+    }
+
+    public static boolean isPalindrome(String input) {
+        int start = 0;
+        int end = input.length() - 1;
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+}
+
+
+Character Occurrence Count
+
+public class CharacterOccurrenceCount {
+    public static void main(String[] args) {
+        String input = "Hello World!";
+        char target = 'l';
+        System.out.println("Occurrences of '" + target + "' in '" + input + "': " + countOccurrences(input, target));
+    }
+
+    public static int countOccurrences(String input, char target) {
+        int count = 0;
+        for (char c : input.toCharArray()) {
+            if (c == target) {
+                count++;
+            }
+        }
+        return count;
+    }
+}

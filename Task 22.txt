@@ -1,0 +1,96 @@
+Task 22:
+
+Task 1: Iterator Practice
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class IteratorPractice {
+    public static void main(String[] args) {
+        // Create an ArrayList of student names
+        ArrayList<String> studentNames = new ArrayList<>();
+        studentNames.add("Alice");
+        studentNames.add("Bob");
+        studentNames.add("Charlie");
+        studentNames.add("David");
+        studentNames.add("Eve");
+
+        // Use an Iterator to print all student names
+        System.out.println("Student Names:");
+        Iterator<String> iterator = studentNames.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        // Remove a student whose name starts with "A" using Iterator
+        iterator = studentNames.iterator();
+        while (iterator.hasNext()) {
+            String name = iterator.next();
+            if (name.startsWith("A")) {
+                iterator.remove();
+            }
+        }
+
+        // Print the updated list of student names
+        System.out.println("Updated Student Names:");
+        for (String name : studentNames) {
+            System.out.println(name);
+        }
+    }
+}
+
+
+Task 2: ListIterator Practice
+
+import java.util.LinkedList;
+import java.util.ListIterator;
+
+public class ListIteratorPractice {
+    public static void main(String[] args) {
+        // Create a LinkedList of city names
+        LinkedList<String> cityNames = new LinkedList<>();
+        cityNames.add("New York");
+        cityNames.add("Los Angeles");
+        cityNames.add("Chicago");
+        cityNames.add("Houston");
+        cityNames.add("Seattle");
+
+        // Use a ListIterator to traverse the list forward and print all cities
+        System.out.println("City Names (Forward):");
+        ListIterator<String> listIterator = cityNames.listIterator();
+        while (listIterator.hasNext()) {
+            System.out.println(listIterator.next());
+        }
+
+        // Traverse the list in reverse order and print the cities again
+        System.out.println("City Names (Reverse):");
+        while (listIterator.hasPrevious()) {
+            System.out.println(listIterator.previous());
+        }
+    }
+}
+
+
+Task 3: Enumeration Practice
+
+import java.util.Enumeration;
+import java.util.Vector;
+
+public class EnumerationPractice {
+    public static void main(String[] args) {
+        // Create a Vector of country names
+        Vector<String> countryNames = new Vector<>();
+        countryNames.add("USA");
+        countryNames.add("Canada");
+        countryNames.add("Mexico");
+        countryNames.add("UK");
+        countryNames.add("Germany");
+
+        // Use Enumeration to print all country names
+        System.out.println("Country Names:");
+        Enumeration<String> enumeration = countryNames.elements();
+        while (enumeration.hasMoreElements()) {
+            System.out.println(enumeration.nextElement());
+        }
+    }
+}

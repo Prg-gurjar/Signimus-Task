@@ -1,0 +1,149 @@
+Task 11:
+
+Package and Access Modifiers Example
+Employee.java
+
+package com.company.department;
+
+public class Employee {
+    private String name;
+    private int age;
+    private double salary;
+
+    // Constructor
+    public Employee(String name, int age, double salary) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+    }
+
+    // Public methods to access private fields
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    // Protected method
+    protected void displayDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Salary: " + salary);
+    }
+
+    // Default method
+    void displaySalary() {
+        System.out.println("Salary: " + salary);
+    }
+
+    // Private method
+    private void displayAge() {
+        System.out.println("Age: " + age);
+    }
+}
+
+
+Department.java
+
+package com.company.department;
+
+public class Department {
+    public static void main(String[] args) {
+        Employee employee = new Employee("John Doe", 30, 50000.0);
+
+        // Accessing Employee details using public methods
+        System.out.println("Name: " + employee.getName());
+        System.out.println("Age: " + employee.getAge());
+        System.out.println("Salary: " + employee.getSalary());
+
+        // Accessing Employee details using protected method
+        employee.displayDetails();
+
+        // Accessing Employee details using default method
+        employee.displaySalary();
+
+        // Cannot access private method directly
+        // employee.displayAge();
+    }
+}
+
+
+Access Modifiers Demonstration
+
+public class AccessModifiersDemo {
+    public static void main(String[] args) {
+        // Public access modifier
+        PublicClass publicClass = new PublicClass();
+        publicClass.publicMethod();
+
+        // Private access modifier
+        PrivateClass privateClass = new PrivateClass();
+        // privateClass.privateMethod(); // Error: cannot access private method
+
+        // Protected access modifier
+        ProtectedClass protectedClass = new ProtectedClass();
+        protectedClass.protectedMethod();
+
+        // Default access modifier
+        DefaultClass defaultClass = new DefaultClass();
+        defaultClass.defaultMethod();
+    }
+}
+
+class PublicClass {
+    public void publicMethod() {
+        System.out.println("Public method");
+    }
+}
+
+class PrivateClass {
+    private void privateMethod() {
+        System.out.println("Private method");
+    }
+}
+
+class ProtectedClass {
+    protected void protectedMethod() {
+        System.out.println("Protected method");
+    }
+}
+
+class DefaultClass {
+    void defaultMethod() {
+        System.out.println("Default method");
+    }
+}
+
+
+Sorting a List using java.util
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class SortingList {
+    public static void main(String[] args) {
+        // Create a list of integers
+        List<Integer> list = new ArrayList<>();
+        list.add(5);
+        list.add(2);
+        list.add(8);
+        list.add(1);
+        list.add(9);
+
+        // Print the original list
+        System.out.println("Original List: " + list);
+
+        // Sort the list in ascending order
+        Collections.sort(list);
+
+        // Print the sorted list
+        System.out.println("Sorted List: " + list);
+    }
+}

@@ -1,0 +1,84 @@
+ Task 10:
+
+Array Reversal without Additional Arrays
+
+public class ArrayReversal {
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5};
+        System.out.println("Original Array:");
+        printArray(array);
+        reverseArray(array);
+        System.out.println("Reversed Array:");
+        printArray(array);
+    }
+
+    public static void reverseArray(int[] array) {
+        int start = 0;
+        int end = array.length - 1;
+        while (start < end) {
+            // Swap elements
+            int temp = array[start];
+            array[start] = array[end];
+            array[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public static void printArray(int[] array) {
+        for (int element : array) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+    }
+}
+
+
+Anagram Check
+
+public class AnagramCheck {
+    public static void main(String[] args) {
+        String str1 = "listen";
+        String str2 = "silent";
+        System.out.println("Are '" + str1 + "' and '" + str2 + "' anagrams? " + areAnagrams(str1, str2));
+    }
+
+    public static boolean areAnagrams(String str1, String str2) {
+        // Convert to lowercase and sort
+        char[] arr1 = str1.toLowerCase().toCharArray();
+        char[] arr2 = str2.toLowerCase().toCharArray();
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        return Arrays.equals(arr1, arr2);
+    }
+}
+
+
+StringBuilder for String Reversal and Vowel Removal
+
+public class StringBuilderExample {
+    public static void main(String[] args) {
+        String input = "Hello World!";
+        System.out.println("Original String: " + input);
+        System.out.println("Reversed String without Vowels: " + reverseAndRemoveVowels(input));
+    }
+
+    public static String reverseAndRemoveVowels(String input) {
+        StringBuilder sb = new StringBuilder(input);
+        // Reverse the string
+        sb.reverse();
+        // Remove vowels
+        for (int i = sb.length() - 1; i >= 0; i--) {
+            char c = sb.charAt(i);
+            if (isVowel(c)) {
+                sb.deleteCharAt(i);
+            }
+        }
+        return sb.toString();
+    }
+
+    public static boolean isVowel(char c) {
+        c = Character.toLowerCase(c);
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+}

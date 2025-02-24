@@ -1,0 +1,86 @@
+Task 20:
+
+Currency Converter
+
+import java.math.BigDecimal;
+
+public class CurrencyConverter {
+    // Define exchange rates as static final BigDecimal fields
+    private static final BigDecimal USD_TO_EUR = new BigDecimal("0.88");
+    private static final BigDecimal USD_TO_GBP = new BigDecimal("0.76");
+    private static final BigDecimal EUR_TO_USD = new BigDecimal("1.13");
+    private static final BigDecimal EUR_TO_GBP = new BigDecimal("0.86");
+    private static final BigDecimal GBP_TO_USD = new BigDecimal("1.32");
+    private static final BigDecimal GBP_TO_EUR = new BigDecimal("1.16");
+
+    // Method to convert USD to EUR
+    public static BigDecimal usdToEur(BigDecimal amount) {
+        return amount.multiply(USD_TO_EUR);
+    }
+
+    // Method to convert USD to GBP
+    public static BigDecimal usdToGbp(BigDecimal amount) {
+        return amount.multiply(USD_TO_GBP);
+    }
+
+    // Method to convert EUR to USD
+    public static BigDecimal eurToUsd(BigDecimal amount) {
+        return amount.multiply(EUR_TO_USD);
+    }
+
+    // Method to convert EUR to GBP
+    public static BigDecimal eurToGbp(BigDecimal amount) {
+        return amount.multiply(EUR_TO_GBP);
+    }
+
+    // Method to convert GBP to USD
+    public static BigDecimal gbpToUsd(BigDecimal amount) {
+        return amount.multiply(GBP_TO_USD);
+    }
+
+    // Method to convert GBP to EUR
+    public static BigDecimal gbpToEur(BigDecimal amount) {
+        return amount.multiply(GBP_TO_EUR);
+    }
+
+    public static void main(String[] args) {
+        BigDecimal amount = new BigDecimal("100.00");
+        System.out.println("USD to EUR: " + usdToEur(amount));
+        System.out.println("USD to GBP: " + usdToGbp(amount));
+        System.out.println("EUR to USD: " + eurToUsd(amount));
+        System.out.println("EUR to GBP: " + eurToGbp(amount));
+        System.out.println("GBP to USD: " + gbpToUsd(amount));
+        System.out.println("GBP to EUR: " + gbpToEur(amount));
+    }
+}
+
+
+Immutable Class: Person
+
+import java.time.LocalDate;
+
+public class Person {
+    private final String firstName;
+    private final String lastName;
+    private final LocalDate dateOfBirth;
+
+    public Person(String firstName, String lastName, LocalDate dateOfBirth) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    public int getAge() {
+        return LocalDate.now().getYear() - dateOfBirth.getYear();
+    }
+
+    public static void main(String[] args) {
+        Person person = new Person("John", "Doe", LocalDate.of(1990, 1, 1));
+        System.out.println("Full Name: " + person.getFullName());
+        System.out.println("Age: " + person.getAge());
+    }
+}

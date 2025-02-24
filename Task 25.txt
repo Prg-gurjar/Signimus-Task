@@ -1,0 +1,62 @@
+Task 25:
+
+Banking System with Thread-Safe Withdrawal
+Account.java
+
+public class Account {
+    private double balance;
+
+    public Account(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    public synchronized void withdraw(double amount) {
+        if (amount > balance) {
+            System.out.println("Insufficient funds");
+            return;
+        }
+        balance -= amount;
+        System.out.println("Withdrawal successful. Remaining balance: " + balance);
+    }
+
+    public synchronized double getBalance() {
+        return balance;
+    }
+}
+
+
+WithdrawalThread.java
+
+public class WithdrawalThread extends Thread {
+    private Account account;
+    private double amount;
+
+    public WithdrawalThread(Account account, double amount) {
+        this.account = account;
+        this.amount = amount;
+    }
+
+    @Override
+    public void run() {
+        account.withdraw(amount);
+    }
+}
+
+
+BankingSystem.java
+
+public class BankingSystem {
+    public static void main(String[] args) {
+        Account account = new Account(1000.0);
+
+        WithdrawalThread thread1 = new WithdrawalThread(account, 500.0);
+        WithdrawalThread thread2 = new WithdrawalThread(account, 300.0);
+        WithdrawalThread thread3 = new WithdrawalThread(account, 200.0);
+
+        thread1.start();
+        thread2.start();
+        thread3.start();
+    }
+}
+
+

@@ -1,0 +1,141 @@
+ Task 7:
+
+Shape Class Hierarchy
+
+// Abstract Shape class
+public abstract class Shape {
+    public abstract double calculateArea();
+}
+
+// Circle subclass
+public class Circle extends Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+// Rectangle subclass
+public class Rectangle extends Shape {
+    private double width;
+    private double height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double calculateArea() {
+        return width * height;
+    }
+}
+
+
+Payment Interface and Implementations
+
+// Payment interface
+public interface Payment {
+    void pay(double amount);
+    void refund(double amount);
+}
+
+// CreditCardPayment implementation
+public class CreditCardPayment implements Payment {
+    @Override
+    public void pay(double amount) {
+        System.out.println("Paid $" + amount + " using credit card.");
+    }
+
+    @Override
+    public void refund(double amount) {
+        System.out.println("Refunded $" + amount + " using credit card.");
+    }
+}
+
+// PayPalPayment implementation
+public class PayPalPayment implements Payment {
+    @Override
+    public void pay(double amount) {
+        System.out.println("Paid $" + amount + " using PayPal.");
+    }
+
+    @Override
+    public void refund(double amount) {
+        System.out.println("Refunded $" + amount + " using PayPal.");
+    }
+}
+
+
+Employee Management System
+
+// Employee class
+public class Employee {
+    private String name;
+    private double salary;
+
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public void displayDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Salary: $" + salary);
+    }
+}
+
+// Manager subclass
+public class Manager extends Employee {
+    private String department;
+
+    public Manager(String name, double salary, String department) {
+        super(name, salary);
+        this.department = department;
+    }
+
+    @Override
+    public void displayDetails() {
+        super.displayDetails();
+        System.out.println("Department: " + department);
+    }
+}
+
+// Intern subclass
+public class Intern extends Employee {
+    private String university;
+
+    public Intern(String name, double salary, String university) {
+        super(name, salary);
+        this.university = university;
+    }
+
+    @Override
+    public void displayDetails() {
+        super.displayDetails();
+        System.out.println("University: " + university);
+    }
+}
+
+// EmployeeManagementSystem class
+public class EmployeeManagementSystem {
+    public static void main(String[] args) {
+        // Create employees
+        Employee employee = new Employee("John Doe", 50000.0);
+        Manager manager = new Manager("Jane Smith", 100000.0, "Marketing");
+        Intern intern = new Intern("Bob Johnson", 20000.0, "Harvard University");
+
+        // Display employee details
+        employee.displayDetails();
+        System.out.println();
+        manager.displayDetails();
+        System.out.println();
+        intern.displayDetails();
+    }
+}

@@ -1,0 +1,94 @@
+Task-3
+// Define the BankAccount class
+public class BankAccount {
+    // Private fields
+    private int accountNumber;
+    private String accountHolder;
+    private double balance;
+
+    // Constructor
+    public BankAccount(int accountNumber, String accountHolder, double balance) {
+        this.accountNumber = accountNumber;
+        this.accountHolder = accountHolder;
+        this.balance = balance;
+    }
+
+    // Getters
+    public int getAccountNumber() {
+        return this.accountNumber;
+    }
+
+    public String getAccountHolder() {
+        return this.accountHolder;
+    }
+
+    public double getBalance() {
+        return this.balance;
+    }
+
+    // Setters
+    public void setAccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public void setAccountHolder(String accountHolder) {
+        this.accountHolder = accountHolder;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    // Deposit method
+    public void deposit(double amount) {
+        if (amount > 0) {
+            this.balance += amount;
+            System.out.println("Deposit successful. New balance: " + this.balance);
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
+    }
+
+    // Withdraw method
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= this.balance) {
+            this.balance -= amount;
+            System.out.println("Withdrawal successful. New balance: " + this.balance);
+        } else {
+            System.out.println("Invalid withdrawal amount.");
+        }
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        // Create a new BankAccount object
+        BankAccount account = new BankAccount(12345, "John Doe", 1000.0);
+
+        // Display initial account information
+        System.out.println("Account Number: " + account.getAccountNumber());
+        System.out.println("Account Holder: " + account.getAccountHolder());
+        System.out.println("Initial Balance: " + account.getBalance());
+
+        // Deposit money
+        account.deposit(500.0);
+
+        // Withdraw money
+        account.withdraw(200.0);
+
+        // Display final account information
+        System.out.println("Final Balance: " + account.getBalance());
+    }
+}
+
+
+Output:
+
+
+Account Number: 12345
+Account Holder: John Doe
+Initial Balance: 1000.0
+Deposit successful. New balance: 1500.0
+Withdrawal successful. New balance: 1300.0
+Final Balance: 1300.0

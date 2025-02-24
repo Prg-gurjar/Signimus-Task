@@ -1,0 +1,76 @@
+Task 8:
+
+Array Task 1: Sum and Average
+
+public class ArrayTask1 {
+    public static void main(String[] args) {
+        // Create an array of integers
+        int[] array = {10, 20, 30, 40, 50};
+
+        // Initialize sum and count variables
+        int sum = 0;
+        int count = array.length;
+
+        // Calculate the sum of all elements in the array
+        for (int i = 0; i < count; i++) {
+            sum += array[i];
+        }
+
+        // Calculate the average
+        double average = (double) sum / count;
+
+        // Print the results
+        System.out.println("Sum: " + sum);
+        System.out.println("Average: " + average);
+    }
+}
+
+
+Array Task 2: Maximum and Minimum
+
+public class ArrayTask2 {
+    public static void main(String[] args) {
+        // Create an array of integers
+        int[] array = {10, 20, 30, 40, 50};
+
+        // Initialize max and min variables
+        int max = array[0];
+        int min = array[0];
+
+        // Find the maximum and minimum values in the array
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            } else if (array[i] < min) {
+                min = array[i];
+            }
+        }
+
+        // Print the results
+        System.out.println("Maximum: " + max);
+        System.out.println("Minimum: " + min);
+    }
+}
+
+
+Array Task 3: Matrix Representation
+
+public class ArrayTask3 {
+    public static void main(String[] args) {
+        // Create a 2D array to represent a matrix
+        int[][] matrix = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+
+        // Print the matrix in a well-formatted manner
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+}
+    

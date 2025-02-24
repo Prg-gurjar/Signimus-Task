@@ -1,0 +1,116 @@
+Task 24:
+
+Sorting Student Objects
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+class Student {
+    String name;
+    int age;
+    int rollNumber;
+
+    public Student(String name, int age, int rollNumber) {
+        this.name = name;
+        this.age = age;
+        this.rollNumber = rollNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", rollNumber=" + rollNumber +
+                '}';
+    }
+}
+
+class AgeComparator implements Comparator<Student> {
+    @Override
+    public int compare(Student s1, Student s2) {
+        return Integer.compare(s1.age, s2.age);
+    }
+}
+
+class RollNumberComparator implements Comparator<Student> {
+    @Override
+    public int compare(Student s1, Student s2) {
+        return Integer.compare(s1.rollNumber, s2.rollNumber);
+    }
+}
+
+public class SortingStudents {
+    public static void main(String[] args) {
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("John", 20, 1));
+        students.add(new Student("Alice", 22, 3));
+        students.add(new Student("Bob", 21, 2));
+
+        // Natural ordering (based on name)
+        Collections.sort(students);
+        System.out.println("Sorted by name:");
+        for (Student student : students) {
+            System.out.println(student);
+        }
+
+        // Sorting using AgeComparator
+        Collections.sort(students, new AgeComparator());
+        System.out.println("Sorted by age:");
+        for (Student student : students) {
+            System.out.println(student);
+        }
+
+        // Sorting using RollNumberComparator
+        Collections.sort(students, new RollNumberComparator());
+        System.out.println("Sorted by roll number:");
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+}
+
+
+Printing Even and Odd Numbers using Threads
+
+class EvenNumberThread extends Thread {
+    @Override
+    public void run() {
+        for (int i = 2; i <= 10; i += 2) {
+            System.out.println("Even number: " + i);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+}
+
+class OddNumberThread extends Thread {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 10; i += 2) {
+            System.out.println("Odd number: " + i);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+}
+
+public class PrintingEvenOddNumbers {
+    public static void main(String[] args) {
+        EvenNumberThread evenThread = new EvenNumberThread();
+        OddNumberThread oddThread = new OddNumberThread();
+
+        evenThread.start();
+        oddThread.start();
+    }
+}
+
+Note: The PrintingEvenOddNumbers program will print even and odd numbers simultaneously, but the output may vary due to the concurrent nature of threads.

@@ -1,0 +1,105 @@
+Task 23:
+
+Custom Sorting by 2nd Character
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+class Student {
+    String firstName;
+    String lastName;
+    int age;
+    double height;
+
+    public Student(String firstName, String lastName, int age, double height) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.height = height;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", height=" + height +
+                '}';
+    }
+}
+
+public class CustomSorting {
+    public static void main(String[] args) {
+        Student[] students = new Student[] {
+                new Student("John", "Doe", 25, 175.5),
+                new Student("Alice", "Smith", 30, 165.2),
+                new Student("Bob", "Johnson", 20, 180.1),
+                new Student("Eve", "Williams", 28, 170.3)
+        };
+
+        Arrays.sort(students, new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                return Character.compare(s1.firstName.charAt(1), s2.firstName.charAt(1));
+            }
+        });
+
+        System.out.println("Sorted by 2nd character of first name:");
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+}
+
+
+Natural Order Sorting by Age using Comparable
+
+import java.util.Arrays;
+
+class Student implements Comparable<Student> {
+    String firstName;
+    String lastName;
+    int age;
+    double height;
+
+    public Student(String firstName, String lastName, int age, double height) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.height = height;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", height=" + height +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Student other) {
+        return Integer.compare(this.age, other.age);
+    }
+}
+
+public class NaturalOrderSorting {
+    public static void main(String[] args) {
+        Student[] students = new Student[] {
+                new Student("John", "Doe", 25, 175.5),
+                new Student("Alice", "Smith", 30, 165.2),
+                new Student("Bob", "Johnson", 20, 180.1),
+                new Student("Eve", "Williams", 28, 170.3)
+        };
+
+        Arrays.sort(students);
+
+        System.out.println("Sorted by age in natural order:");
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+}

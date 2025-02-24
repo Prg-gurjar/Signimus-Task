@@ -1,0 +1,151 @@
+Task 21:
+
+Varargs Average Calculator
+
+public class VarargsAverageCalculator {
+    public static double calculateAverage(double... numbers) {
+        double sum = 0;
+        for (double number : numbers) {
+            sum += number;
+        }
+        return numbers.length == 0 ? 0 : sum / numbers.length;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Average: " + calculateAverage(10.5, 20.3, 30.7));
+        System.out.println("Average: " + calculateAverage());
+    }
+}
+
+
+LeetCode Problem #1: Two Sum
+
+public class TwoSum {
+    public int[] twoSum(int[] nums, int target) {
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[] { i, j };
+                }
+            }
+        }
+        return new int[] {};
+    }
+
+    public static void main(String[] args) {
+        TwoSum twoSum = new TwoSum();
+        int[] result = twoSum.twoSum(new int[] { 2, 7, 11, 15 }, 9);
+        System.out.println("Indices: " + result[0] + ", " + result[1]);
+    }
+}
+
+
+LeetCode Problem #20: Valid Parentheses
+
+import java.util.Stack;
+
+public class ValidParentheses {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : s.toCharArray()) {
+            if (c == '(' || c == '[' || c == '{') {
+                stack.push(c);
+            } else if (c == ')' || c == ']' || c == '}') {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+                char top = stack.pop();
+                if ((c == ')' && top != '(') || (c == ']' && top != '[') || (c == '}' && top != '{')) {
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        ValidParentheses validParentheses = new ValidParentheses();
+        System.out.println("Valid: " + validParentheses.isValid("()"));
+        System.out.println("Valid: " + validParentheses.isValid("()[]{}"));
+        System.out.println("Valid: " + validParentheses.isValid("(]"));
+    }
+}
+
+
+LeetCode Problem #206: Reverse Linked List
+
+public class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int x) {
+        val = x;
+    }
+}
+
+public class ReverseLinkedList {
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        return prev;
+    }
+
+    public static void main(String[] args) {
+        ReverseLinkedList reverseLinkedList = new ReverseLinkedList();
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        ListNode reversedHead = reverseLinkedList.reverseList(head);
+        while (reversedHead != null) {
+            System.out.print(reversedHead.val + " ");
+            reversedHead = reversedHead.next;
+        }
+    }
+}
+
+
+LeetCode Problem #9: Palindrome Number
+
+public class PalindromeNumber {
+    public boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+        int reversed = 0;
+        int original = x;
+        while (x != 0) {
+            int digit = x % 10;
+            reversed = reversed * 10 + digit;
+            x /= 10;
+        }
+        return original == reversed;
+    }
+
+    public static void main(String[] args) {
+        PalindromeNumber palindromeNumber = new PalindromeNumber();
+        System.out.println("Palindrome: " + palindromeNumber.isPalindrome(121));
+        System.out.println("Palindrome: " + palindromeNumber.isPalindrome(-121));
+    }
+}
+
+
+LeetCode Problem #21: Merge Two Sorted Lists
+
+public class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int x) {
+        val = x;
+    }
+}
+
+public class MergeTwoSortedLists {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(0

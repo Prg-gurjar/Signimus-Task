@@ -1,0 +1,52 @@
+Task 19:
+
+
+// Define the Shape interface
+interface Shape {
+    double calculateArea();
+}
+
+// Define the abstract Rectangle class
+abstract class Rectangle implements Shape {
+    protected double width;
+    protected double height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    // Define a nested static Circle class
+    public static class Circle implements Shape {
+        private double radius;
+
+        public Circle(double radius) {
+            this.radius = radius;
+        }
+
+        @Override
+        public double calculateArea() {
+            return Math.PI * radius * radius;
+        }
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        // Create an anonymous instance of Rectangle
+        Rectangle anonymousRectangle = new Rectangle(5, 10) {
+            @Override
+            public double calculateArea() {
+                return width * height;
+            }
+        };
+
+        // Create an instance of Rectangle.Circle
+        Rectangle.Circle circle = new Rectangle.Circle(7);
+
+        // Print the areas of both shapes
+        System.out.println("Area of anonymous Rectangle: " + anonymousRectangle.calculateArea());
+        System.out.println("Area of Circle: " + circle.calculateArea());
+    }
+}

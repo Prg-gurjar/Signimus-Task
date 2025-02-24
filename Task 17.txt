@@ -1,0 +1,70 @@
+ Task 17:
+
+Implementing a Stack to Reverse a String
+
+import java.util.Stack;
+
+public class StringReversalUsingStack {
+    public static void main(String[] args) {
+        String input = "Hello World!";
+        System.out.println("Original string: " + input);
+        System.out.println("Reversed string: " + reverse(input));
+    }
+
+    public static String reverse(String input) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+        StringBuilder reversed = new StringBuilder();
+        while (!stack.isEmpty()) {
+            reversed.append(stack.pop());
+        }
+        return reversed.toString();
+    }
+}
+
+
+Priority Hospital Queue for Urgent Emergency
+
+import java.util.PriorityQueue;
+
+class Patient implements Comparable<Patient> {
+    private String name;
+    private int priority;
+
+    public Patient(String name, int priority) {
+        this.name = name;
+        this.priority = priority;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    @Override
+    public int compareTo(Patient other) {
+        return Integer.compare(this.priority, other.priority);
+    }
+}
+
+public class HospitalQueue {
+    public static void main(String[] args) {
+        PriorityQueue<Patient> queue = new PriorityQueue<>();
+
+        // Add patients to the queue
+        queue.add(new Patient("John Doe", 3));
+        queue.add(new Patient("Jane Smith", 1));
+        queue.add(new Patient("Bob Johnson", 2));
+
+        // Treat patients based on priority
+        while (!queue.isEmpty()) {
+            Patient patient = queue.poll();
+            System.out.println("Treating patient: " + patient.getName() + " (Priority: " + patient.getPriority() + ")");
+        }
+    }
+}

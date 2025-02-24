@@ -1,0 +1,94 @@
+Task -5
+
+
+// Define the Person class
+public class Person {
+    // Attributes
+    private String name;
+    private int age;
+
+    // Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Getters
+    public String getName() {
+        return this.name;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+// Define the Student class that inherits from Person
+public class Student extends Person {
+    // Additional attributes
+    private String studentId;
+    private String course;
+
+    // Constructor
+    public Student(String name, int age, String studentId, String course) {
+        super(name, age); // Call the Person constructor
+        this.studentId = studentId;
+        this.course = course;
+    }
+
+    // Getters
+    public String getStudentId() {
+        return this.studentId;
+    }
+
+    public String getCourse() {
+        return this.course;
+    }
+
+    // Setters
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    // Override the toString() method
+    @Override
+    public String toString() {
+        return "Student Name: " + super.getName() +
+               "\nAge: " + super.getAge() +
+               "\nStudent ID: " + this.studentId +
+               "\nCourse: " + this.course;
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        // Create a new Student object
+        Student student = new Student("John Doe", 20, "S12345", "Computer Science");
+
+        // Display student details using the toString() method
+        System.out.println(student.toString());
+    }
+}
+
+
+Output:
+
+
+Student Name: John Doe
+Age: 20
+Student ID: S12345
+Course: Computer Science
