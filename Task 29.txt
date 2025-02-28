@@ -1,0 +1,108 @@
+Task 29:
+
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class StudentDatabaseOperations {
+    public static void main(String[] args) {
+        // Database connection parameters
+        String dbUrl = "jdbc:mysql://localhost:3306/studentdb";
+        String username = "your_username";
+        String password = "your_password";
+
+        try {
+            // Load MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establish database connection
+            Connection connection = DriverManager.getConnection(dbUrl, username, password);
+
+            // Insert student record
+            insertStudentRecord(connection, "John Doe", "johndoe@example.com", 20);
+
+            // Update student record
+            updateStudentRecord(connection, 1, "Jane Doe", "janedoe@example.com", 22);
+
+            // Delete student record
+            deleteStudentRecord(connection, 1);
+
+            // Retrieve student records
+            retrieveStudentRecords(connection);
+
+            // Call stored procedure to retrieve employee details
+            retrieveEmployeeDetails(connection, "John");
+
+            // Close database resources
+            connection.close();
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC driver not found.");
+        } catch (SQLException e) {
+            System.out.println("Error accessing database: " + e.getMessage());
+        }
+    }
+
+    private static void insertStudentRecord(Connection connection, String name, String email, int age) throws SQLException {
+        String query = "INSERT INTO students (name, email, age) VALUES (?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, name);
+        statement.setString(2, email);
+        statement.setInt(3, age);
+        statement.executeUpdate();
+        System.out.println("Student record inserted successfully.");
+    }
+
+    private static void updateStudentRecord(Connection connection, int id, String name, String email, int age) throws SQLException {
+        String query = "UPDATE students SET name = ?, email = ?, age = ? WHERE id = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, name);
+        statement.setString(2, email);
+        statement.setInt(3, age);
+        statement.setInt(4, id);
+        statement.executeUpdate();
+        System.out.println("Student record updated successfully.");
+    }
+
+    private static void deleteStudentRecord(Connection connection, int id) throws SQLException {
+        String query = "DELETE FROM students WHERE id = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, id);
+        statement.executeUpdate();
+        System.out.println("Student record deleted successfully.");
+    }
+
+    private static void retrieveStudentRecords(Connection connection) throws SQLException {
+        String query = "SELECT * FROM students";
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        System.out.println("Student Records:");
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String name = resultSet.getString("name");
+            String email = resultSet.getString("email");
+            int age = resultSet.getInt("age");
+            System.out.println("ID: " + id + ", Name: " + name + ", Email: " + email + ", Age: " + age);
+        }
+    }
+
+    private static void retrieveEmployeeDetails(Connection connection, String name) throws SQLException {
+        String query = "{CALL get_employee_details(?)}";
+        CallableStatement statement = connection.prepareCall(query);
+        statement.setString(1, name);
+        ResultSet resultSet = statement.executeQuery();
+        System.out.println("Employee Details:");
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String employeeName = resultSet.getString("name");
+            String department = resultSet.getString("department");
+            System.out.println("ID: " + id + ", Name: " + employeeName + ", Department: " + department);
+        }
+    }
+}
+
+

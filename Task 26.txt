@@ -1,0 +1,73 @@
+Task 26:
+
+
+import java.util.Scanner;
+
+class Book {
+    private String title;
+    private boolean isAvailable;
+
+    public Book(String title) {
+        this.title = title;
+        this.isAvailable = true;
+    }
+
+    public synchronized void borrowBook() {
+        while (!isAvailable) {
+            try {
+                System.out.println("Book is not available. Waiting...");
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        isAvailable = false;
+        System.out.println("Book borrowed: " + title);
+    }
+
+    public synchronized void returnBook() {
+        isAvailable = true;
+        System.out.println("Book returned: " + title);
+        notify();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+}
+
+class Student extends Thread {
+    private Book book;
+    private String studentName;
+
+    public Student(Book book, String studentName) {
+        this.book = book;
+        this.studentName = studentName;
+    }
+
+    @Override
+    public void run() {
+        System.out.println(studentName + " is trying to borrow the book...");
+        book.borrowBook();
+        try {
+            Thread.sleep(1000); // Simulate reading time
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        System.out.println(studentName + " is returning the book...");
+        book.returnBook();
+    }
+}
+
+public class LibraryManagementSystem {
+    public static void main(String[] args) {
+        Book book = new Book("Java Programming");
+        Student student1 = new Student(book, "John");
+        Student student2 = new Student(book, "Alice");
+
+        student1.start();
+        student2.start();
+    }
+}
+
+

@@ -1,0 +1,56 @@
+Task 28:
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DatabaseConnection {
+    public static void main(String[] args) {
+        // Database connection parameters
+        String dbUrl = "jdbc:mysql://localhost:3306/sampledb";
+        String username = "your_username";
+        String password = "your_password";
+
+        // Table name and query
+        String tableName = "employees";
+        String query = "SELECT * FROM " + tableName;
+
+        try {
+            // Load MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establish database connection
+            Connection connection = DriverManager.getConnection(dbUrl, username, password);
+
+            // Create Statement object
+            Statement statement = connection.createStatement();
+
+            // Execute query and retrieve results
+            ResultSet resultSet = statement.executeQuery(query);
+
+            // Display records from the table
+            System.out.println("Records from " + tableName + ":");
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String department = resultSet.getString("department");
+
+                System.out.println("ID: " + id + ", Name: " + name + ", Department: " + department);
+            }
+
+            // Close database resources
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC driver not found.");
+        } catch (SQLException e) {
+            System.out.println("Error accessing database: " + e.getMessage());
+        }
+    }
+}
+
+

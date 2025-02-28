@@ -1,0 +1,62 @@
+ Task 30:
+
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+class Transaction {
+    private int accountId;
+    private double amount;
+
+    public Transaction(int accountId, double amount) {
+        this.accountId = accountId;
+        this.amount = amount;
+    }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+}
+
+public class BankingSystem {
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/banking_system";
+    private static final String USERNAME = "your_username";
+    private static final String PASSWORD = "your_password";
+
+    public static void main(String[] args) {
+        // Create a list of transactions
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.add(new Transaction(1, 100.0));
+        transactions.add(new Transaction(2, 200.0));
+        transactions.add(new Transaction(3, 300.0));
+
+        // Perform batch processing
+        try (Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD)) {
+            connection.setAutoCommit(false); // Disable auto-commit
+
+            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO accounts (account_id, balance) VALUES (?, ?)")) {
+                for (Transaction transaction : transactions) {
+                    statement.setInt(1, transaction.getAccountId());
+                    statement.setDouble(2, transaction.getAmount());
+                    statement.addBatch();
+                }
+
+                statement.executeBatch();
+                connection.commit(); // Commit changes
+                System.out.println("Transactions committed successfully.");
+            } catch (SQLException e) {
+                connection.rollback(); // Rollback changes
+                System.out.println("Error: " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+

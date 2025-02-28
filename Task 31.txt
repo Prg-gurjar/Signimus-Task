@@ -1,0 +1,37 @@
+Task 31:
+
+
+// Lambda expression using Runnable interface
+public class LambdaRunnable {
+    public static void main(String[] args) {
+        // Lambda expression implementing Runnable interface
+        Runnable runnable = () -> {
+            System.out.println("Hello from lambda runnable!");
+        };
+
+        // Execute the lambda expression
+        runnable.run();
+    }
+}
+
+
+
+// Check for Even Numbers with Lambda Expression
+interface EvenNumberChecker {
+    boolean isEven(int number);
+}
+
+public class LambdaEvenNumberChecker {
+    public static void main(String[] args) {
+        // Lambda expression implementing EvenNumberChecker interface
+        EvenNumberChecker evenNumberChecker = (number) -> {
+            return number % 2 == 0;
+        };
+
+        // Use the lambda expression to check for even numbers
+        System.out.println("Is 10 even? " + evenNumberChecker.isEven(10));
+        System.out.println("Is 11 even? " + evenNumberChecker.isEven(11));
+    }
+}
+
+
